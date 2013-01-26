@@ -6,6 +6,8 @@
 	public class Game extends MovieClip {
 		var world:b2World = null;
 		
+		public static var ToBox:Number = 1.0 / 4.0;
+		public static var ToFlash:Number = 1.0 / ToBox;
 		public static var instance:Game = null;
 		public static var dt:Number = 1.0 / 30.0;
 		
@@ -20,7 +22,7 @@
 		}
 		
 		public function Init():void {
-			world = new b2World(new b2Vec2(0, 5), false);
+			world = new b2World(new b2Vec2(0, 100), false);
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 		}
 		
