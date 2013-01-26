@@ -71,43 +71,47 @@
 		}
 		
 		public function KeyDown(e:KeyboardEvent) {
-			if (e.keyCode == Keyboard.LEFT) {
-				square.movingLeft = true;
-			} else if (e.keyCode == Keyboard.RIGHT) {
-				square.movingRight = true;
-			} else if ( e.keyCode == Keyboard.SPACE) {
-				square.Jump();
+			CheckForP1Down(e.keyCode);
+			CheckForP2Down(e.keyCode);
+		}
+		
+		public function CheckForP1Down(keyCode:uint) {
+			HeartKeyDown(square, keyCode, Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP);
+		}
+		
+		public function CheckForP2Down(keyCode:uint) {
+			HeartKeyDown(square2, keyCode, Keyboard.A, Keyboard.D, Keyboard.W);
+		}
+		
+		public function HeartKeyDown(heart:Heart, keyCode:uint, leftKeyCode:uint, rightKeyCode:uint, jumpKeyCode:uint) {
+			if (keyCode == leftKeyCode) {
+				heart.movingLeft = true;
+			} else if (keyCode == rightKeyCode) {
+				heart.movingRight = true;
+			} else if (keyCode == jumpKeyCode) {
+				heart.Jump();
 			}
 		}
 		
 		public function KeyUp(e:KeyboardEvent) {
-			if (e.keyCode == Keyboard.LEFT) {
-				square.movingLeft = false;
-			} else if (e.keyCode == Keyboard.RIGHT) {
-				square.movingRight = false;
+			CheckForP1Up(e.keyCode);
+			CheckForP2Up(e.keyCode);
+		}
+		
+		public function CheckForP1Up(keyCode:uint) {
+			HeartKeyUp(square, keyCode, Keyboard.LEFT, Keyboard.RIGHT);
+		}
+		
+		public function CheckForP2Up(keyCode:uint) {
+			HeartKeyUp(square2, keyCode, Keyboard.A, Keyboard.D);
+		}
+		
+		public function HeartKeyUp(heart:Heart, keyCode:uint, leftKeyCode:uint, rightKeyCode:uint) {
+			if (keyCode == leftKeyCode) {
+				heart.movingLeft = false;
+			} else if (keyCode == rightKeyCode) {
+				heart.movingRight = false;
 			}
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
