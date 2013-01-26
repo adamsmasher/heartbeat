@@ -12,6 +12,8 @@ package  {
 	public class Heart extends MovieClip {
 		var ex:Number = 0;
 		var ey:Number = 0;
+		var movingLeft:Boolean = false;
+		var movingRight:Boolean = false;
 		var body:b2Body = null;
 		
 		public function Heart() {		
@@ -34,11 +36,35 @@ package  {
 			fixtureDef.friction = 0.5;
 			var fixture:b2Fixture = body.CreateFixture(fixtureDef);
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
+			trace("Heart starts");
 		}
 		
 		public function Tick(e:Event):void {
+			DoInputMotion();
 			x = body.GetPosition().x * Game.ToFlash;
 			y = body.GetPosition().y * Game.ToFlash;
+		}
+		
+		public function DoInputMotion() {
+			if (movingRight) {
+				body.ApplyImpulse(new b2Vec2(3000, 0), body.GetPosition());
+			} else if (movingLeft) {
+			    body.ApplyImpulse(new b2Vec2( -3000, 0), body.GetPosition());
+			}			
+		}
+		
+		public function StartMoving() {
+			movingRight = true;			
+		}
+		
+		public function StopMoving() {
+		    movingRight = false;
+		}
+		
+		public function Jump() {
+			if (body.GetLinearVelocity().y < -0.1 || body.GetLinearVelocity().y > 0.1) {
+				body.ApplyImpulse(new b2Vec2(0, 100000), body.GetPosition());
+			}
 		}
 	}
 }
