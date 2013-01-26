@@ -51,11 +51,11 @@ package  {
 				body.ApplyImpulse(new b2Vec2(3000, 0), body.GetPosition());
 			} else if (movingLeft) {
 			    body.ApplyImpulse(new b2Vec2( -3000, 0), body.GetPosition());
-			}			
+			}
 		}
 		
 		public function StartMoving() {
-			movingRight = true;			
+			movingRight = true;
 		}
 		
 		public function StopMoving() {
@@ -63,8 +63,9 @@ package  {
 		}
 		
 		public function Jump() {
-			if (body.GetLinearVelocity().y < -0.1 || body.GetLinearVelocity().y > 0.1) {
-				body.ApplyImpulse(new b2Vec2(0, 100000), body.GetPosition());
+			var v:b2Vec2 = body.GetLinearVelocity();
+			if (v.y > -0.1 && v.y < 0.1) {
+				body.SetLinearVelocity(new b2Vec2(v.x, -10000));
 			}
 		}
 	}
