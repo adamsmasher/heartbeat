@@ -50,9 +50,11 @@ package  {
 				scaleX = 1;
 			else
 				scaleX = -1;
-			if ((movingLeft || movingRight) && !playing) {
-				gotoAndPlay(4);
-				playing = true;
+			if (movingLeft || movingRight) {
+				if (!playing) {
+					gotoAndPlay(4);
+					playing = true;
+				}
 			}
 			else {
 				playing = false;
