@@ -6,6 +6,8 @@
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.b2World;
+	import Box2D.Dynamics.Joints.b2DistanceJoint;
+	import Box2D.Dynamics.Joints.b2DistanceJointDef;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -19,6 +21,8 @@
 		public static var ToFlash:Number = 1.0 / ToBox;
 		public static var instance:Game = null;
 		public static var dt:Number = 1.0 / 30.0;
+		
+		public static var heartDistanceJoint:b2DistanceJoint;
 		
 		public function Game() {
 			addEventListener(Event.ADDED_TO_STAGE, Added, false, 0, true);
@@ -40,6 +44,7 @@
 			CreateStaticBody(bottomborder, -1);
 			CreateStaticBody(leftborder, -1);
 			CreateStaticBody(rightborder, -1);
+			ConnectHearts();
 			//Audio.ChangeMusic(Audio.introTrack);
 		}
 		
@@ -67,6 +72,7 @@
 			fixtureDef.filter.groupIndex = _groupIndex;
 			var fixture:b2Fixture = body.CreateFixture(fixtureDef);
 			fixture.SetRestitution(0);
+			
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 		}
 		
@@ -112,6 +118,13 @@
 			} else if (keyCode == rightKeyCode) {
 				heart.movingRight = false;
 			}
+		}
+		
+		public function ConnectHearts() {
+			var heartDistanceJointDef:b2DistanceJointDef = new b2DistanceJointDef();
+			heartDistanceJointDef.Initialize(square.body, square2.body, square.body.GetPosition(), square2.body.GetPosition());
+			heartDistanceJointDef.collideConnected = true;
+			heartDistanceJoint = b2DistanceJoint(world.CreateJoint(heartDistanceJointDef));
 		}
 	}
 }
