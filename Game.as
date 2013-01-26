@@ -6,6 +6,8 @@
 	public class Game extends MovieClip {
 		var world:b2World = null;
 		
+		public static var StageWidth:Number = 800;
+		public static var StageHeight:Number = 500;
 		public static var ToBox:Number = 1.0 / 4.0;
 		public static var ToFlash:Number = 1.0 / ToBox;
 		public static var instance:Game = null;
@@ -31,3 +33,25 @@
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
