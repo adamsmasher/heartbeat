@@ -6,6 +6,7 @@ package  {
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.b2Body;
+	import Box2D.Dynamics.Contacts.b2ContactEdge;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	
@@ -64,7 +65,8 @@ package  {
 		
 		public function Jump() {
 			var v:b2Vec2 = body.GetLinearVelocity();
-			if (v.y > -0.1 && v.y < 0.1) {
+			var contacts:b2ContactEdge = body.GetContactList();
+			if (contacts) {
 				body.SetLinearVelocity(new b2Vec2(v.x, -10000));
 			}
 		}
