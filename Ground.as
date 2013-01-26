@@ -8,18 +8,17 @@ package  {
 	import Box2D.Dynamics.b2Body;
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	
-	public class Heart extends MovieClip {
+	public class Ground extends MovieClip {
 		var ex:Number = 0;
 		var ey:Number = 0;
 		var body:b2Body = null;
 		
-		public function Heart() {		
+		public function Ground() {
 			var bodyDef:b2BodyDef = new b2BodyDef;
 			bodyDef.position = new b2Vec2(x * Game.ToBox, y * Game.ToBox);
 			bodyDef.linearDamping = 0.0;
 			bodyDef.angularDamping = 0.0;
-			bodyDef.type = b2Body.b2_dynamicBody;
+			bodyDef.type = b2Body.b2_staticBody;
 			body = Game.instance.world.CreateBody(bodyDef);
 			body.SetUserData(this);
 			
