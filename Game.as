@@ -37,10 +37,6 @@
 		}
 		
 		public function KeyDown(e:KeyboardEvent) {
-			
-		}
-		
-		public function KeyDown(e:KeyboardEvent) {
 			if (e.keyCode == Keyboard.LEFT) {
 				square.movingLeft = true;
 			} else if (e.keyCode == Keyboard.RIGHT) {
