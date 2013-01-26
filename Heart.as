@@ -35,6 +35,7 @@ package  {
 			fixtureDef.restitution = 0.5;
 			fixtureDef.friction = 0.5;
 			var fixture:b2Fixture = body.CreateFixture(fixtureDef);
+			fixture.SetRestitution(0);
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 			trace("Heart starts");
 		}
