@@ -52,6 +52,7 @@
 		
 		public function Tick(e:Event):void {
 			time = time + dt;
+			ApplyGravity();
 			world.Step(dt, 5, 5);
 		}
 		
@@ -128,6 +129,11 @@
 			heartDistanceJointDef.Initialize(square.body, square2.body, square.body.GetPosition(), square2.body.GetPosition());
 			heartDistanceJointDef.collideConnected = true;
 			heartDistanceJoint = b2DistanceJoint(world.CreateJoint(heartDistanceJointDef));
+		}
+
+		public function ApplyGravity() {
+			square.body.ApplyForce(new b2Vec2(0, 250), square.body.GetPosition());
+			square2.body.ApplyForce(new b2Vec2(0, 250), square2.body.GetPosition());
 		}
 	}
 }
