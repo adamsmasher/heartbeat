@@ -51,6 +51,8 @@
 			square2.other = square;			
 			square.face.gotoAndStop(1);
 			square2.face.gotoAndStop(2);
+			
+			new MiniRope(square, square2);
 		}
 		
 		public function Tick(e:Event):void {
