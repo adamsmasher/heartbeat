@@ -16,6 +16,7 @@ package  {
 		var movingLeft:Boolean = false;
 		var movingRight:Boolean = false;
 		var body:b2Body = null;
+		var score:Number = 0;
 		
 		public function Heart() {		
 			var bodyDef:b2BodyDef = new b2BodyDef;
