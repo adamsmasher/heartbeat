@@ -3,6 +3,7 @@
 	import Box2D.Dynamics.Joints.b2RevoluteJoint;
 	import Box2D.Dynamics.Joints.b2RevoluteJointDef;
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	public class Rope extends MovieClip {
 		var segments:Array = new Array;
 		public function Rope() {
@@ -42,6 +43,18 @@
 					CreateRevolute(segments[mid], segments[right]);
 				}
 			}
+			
+			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
+		}
+		
+		public function Tick(e:Event):void {
+			
+		}
+		
+		var beats:Array = null;
+		var trackLength:Number = 0;
+		public function SetBeat(_beats:Array):void {
+			trackLength = 5; // placeholder
 		}
 		
 		public function CreateRevolute(_seg1:RopeSegment, _seg2:RopeSegment):void {
@@ -54,3 +67,15 @@
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
