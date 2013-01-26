@@ -43,6 +43,9 @@
 			CreateStaticBody(rightborder, -1);
 			//Audio.ChangeMusic(IntroMusicLoop);
 			rope.SetTrack(1);
+			
+			square.face.gotoAndStop(1);
+			square2.face.gotoAndStop(2);
 		}
 		
 		public function Tick(e:Event):void {
