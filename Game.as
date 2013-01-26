@@ -54,6 +54,7 @@
 			time = time + dt;
 			ApplyGravity();
 			world.Step(dt, 5, 5);
+			PickupItems();
 		}
 		
 		public function CreateStaticBody(_mc:MovieClip, _groupIndex:int = 0) {
@@ -134,6 +135,21 @@
 		public function ApplyGravity() {
 			square.body.ApplyForce(new b2Vec2(0, 250), square.body.GetPosition());
 			square2.body.ApplyForce(new b2Vec2(0, 250), square2.body.GetPosition());
+		}
+
+		public function PickupItems() {
+			for (var i:int = 0; i < numChildren; i++) {
+				if (getChildAt(i) is Item) {
+					var item:Item = Item(getChildAt(i));
+					if (item.hitTestObject(square)) {
+						square.score++;
+						item.Collected();
+					} else if (item.hitTestObject(square2)) {
+						square2.score++;
+						item.Collected();
+					}
+				}
+			}
 		}
 	}
 }
