@@ -17,6 +17,7 @@ package  {
 		var movingRight:Boolean = false;
 		var body:b2Body = null;
 		var score:Number = 0;
+		var other:Heart = null;
 		
 		public function Heart() {		
 			var bodyDef:b2BodyDef = new b2BodyDef;
@@ -49,10 +50,21 @@ package  {
 		}
 		
 		public function DoInputMotion() {
+			var far = FarFromOther();
 			if (movingRight) {
-				body.ApplyImpulse(new b2Vec2(3000, 0), body.GetPosition());
+				if (far && other.x < this.x) {
+					trace("WARNING");
+					body.ApplyImpulse(new b2Vec2(100, 0), body.GetPosition());
+				} else {
+					body.ApplyImpulse(new b2Vec2(3000, 0), body.GetPosition());
+				}
 			} else if (movingLeft) {
-			    body.ApplyImpulse(new b2Vec2( -3000, 0), body.GetPosition());
+				if (far && other.x > this.x) {
+					trace("WARNING");
+					body.ApplyImpulse(new b2Vec2( -100, 0), body.GetPosition());
+				} else {
+					body.ApplyImpulse(new b2Vec2( -3000, 0), body.GetPosition());
+				}
 			}
 		}
 		
@@ -70,6 +82,16 @@ package  {
 			if (contacts) {
 				body.SetLinearVelocity(new b2Vec2(v.x, -10000));
 			}
+		}
+
+		public function FarFromOther() {
+			if (other) {
+				var dx = this.x - other.x;
+				var dy = this.y - other.y;
+				var d2 = dx * dx + dy * dy;
+				return d2 > 40000;
+			}
+			return false;
 		}
 	}
 }
