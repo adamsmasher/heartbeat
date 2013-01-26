@@ -62,6 +62,8 @@
 			world.Step(dt, 10, 10);
 			PickupItems();
 			CheckForGameOver();
+			p1Score.text = "0";
+			p2Score.text = "0";
 			world.Step(dt, 10, 10);
 		}
 		
