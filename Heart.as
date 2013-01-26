@@ -98,6 +98,7 @@ package  {
 				var p = body.GetPosition();
 				body.SetPosition(new b2Vec2(p.x, p.y - 10 * Game.ToBox));
 				body.SetLinearVelocity(new b2Vec2(v.x, -100000));
+				SoundEffects.jump.play();
 			}
 		}
 
