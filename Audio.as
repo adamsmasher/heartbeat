@@ -5,10 +5,7 @@ package  {
 	import flash.media.SoundTransform;
 	import flash.media.SoundMixer;
 	
-	public class Audio {
-		/*
-		[Embed(source = 'Intro Music Loop.mp3.mp3')] public static var introTrack:Class;
-		
+	public class Audio {		
 		public static var music:Sound = null;
 		public static var musicTrans:SoundTransform = null;
 		public static var musicChannel:SoundChannel = null;
@@ -23,20 +20,37 @@ package  {
 			
 		}
 		
-		public static function ChangeMusic(_sound:Class):void {
+		public static function ChangeMusic(_sound:Class):Number {
 			if (prevMusic == _sound)
-				return;
-				
+				return music.length * 0.001;
 			if (musicChannel != null) {
 				musicChannel.stop();
 			}
-			
 			music = new _sound as Sound;
+			music.play(0, -1, null);
 			musicVolume = 0.0;
 			musicTrans = new SoundTransform(0.0, 0.0);
 			musicChannel = music.play(0, int.MAX_VALUE, musicTrans);
 			prevMusic = _sound;
+			return music.length * 0.001;
 		}
-		*/
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

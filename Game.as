@@ -12,6 +12,7 @@
 	import flash.ui.Keyboard;
 	public class Game extends MovieClip {
 		var world:b2World = null;
+		var time:Number = 0;
 		
 		public static var StageWidth:Number = 800;
 		public static var StageHeight:Number = 500;
@@ -33,17 +34,19 @@
 		}
 		
 		public function Init():void {
-			world = new b2World(new b2Vec2(0, 100), false);
+			world = new b2World(new b2Vec2(0, 0), false);
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 			gotoAndStop(2);
 			CreateStaticBody(topborder, -1);
 			CreateStaticBody(bottomborder, -1);
 			CreateStaticBody(leftborder, -1);
 			CreateStaticBody(rightborder, -1);
-			//Audio.ChangeMusic(Audio.introTrack);
+			//Audio.ChangeMusic(IntroMusicLoop);
+			rope.SetTrack(1);
 		}
 		
 		public function Tick(e:Event):void {
+			time = time + dt;
 			world.Step(dt, 5, 5);
 		}
 		
