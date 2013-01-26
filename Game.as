@@ -131,8 +131,8 @@
 		}
 
 		public function ApplyGravity() {
-			square.body.ApplyForce(new b2Vec2(0, 250), square.body.GetPosition());
-			square2.body.ApplyForce(new b2Vec2(0, 250), square2.body.GetPosition());
+			square.body.ApplyImpulse(new b2Vec2(0, 1000), square.body.GetPosition());
+			square2.body.ApplyImpulse(new b2Vec2(0, 1000), square2.body.GetPosition());
 		}
 
 		public function PickupItems() {

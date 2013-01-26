@@ -95,7 +95,9 @@ package  {
 			var v:b2Vec2 = body.GetLinearVelocity();
 			var contacts:b2ContactEdge = body.GetContactList();
 			if (contacts) {
-				body.SetLinearVelocity(new b2Vec2(v.x, -10000));
+				var p = body.GetPosition();
+				body.SetPosition(new b2Vec2(p.x, p.y - 10 * Game.ToBox));
+				body.SetLinearVelocity(new b2Vec2(v.x, -100000));
 			}
 		}
 
