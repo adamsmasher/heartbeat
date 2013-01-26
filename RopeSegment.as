@@ -38,7 +38,8 @@
 			//var circleShape:b2CircleShape = new b2CircleShape(width * 0.5 * Game.ToBox);
 			//var edgeShape:b2EdgeShape = new b2EdgeShape(new b2Vec2( -width * 0.5 * Game.ToBox, 0), new b2Vec2(width * 0.5 * Game.ToBox, 0));
 			var polygonShape:b2PolygonShape = new b2PolygonShape;
-			ex = width * 0.5;
+			//ex = width * 0.5;
+			ex = 40 * 0.5; // graphically is longer to avoid gaps
 			ey = height * 0.5;
 			polygonShape.SetAsBox(ex * Game.ToBox, ey * Game.ToBox);
 			
@@ -57,6 +58,10 @@
 			x = body.GetPosition().x * Game.ToFlash;
 			y = body.GetPosition().y * Game.ToFlash;
 			rotation = Misc.ToDegrees(body.GetAngle());
+		}
+		
+		public function SetBeat():void {
+			
 		}
 	}
 }
