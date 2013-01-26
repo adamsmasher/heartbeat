@@ -48,15 +48,18 @@
 			//Audio.ChangeMusic(IntroMusicLoop);
 			rope.SetTrack(1);
 			square.other = square2;
-			square2.other = square;
+			square2.other = square;			
+			square.face.gotoAndStop(1);
+			square2.face.gotoAndStop(2);
 		}
 		
 		public function Tick(e:Event):void {
 			time = time + dt;
 			ApplyGravity();
-			world.Step(dt, 5, 5);
+			world.Step(dt, 10, 10);
 			PickupItems();
 			CheckForGameOver();
+			world.Step(dt, 10, 10);
 		}
 		
 		public function CreateStaticBody(_mc:MovieClip, _groupIndex:int = 0) {

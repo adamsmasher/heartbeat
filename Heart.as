@@ -18,6 +18,7 @@ package  {
 		var body:b2Body = null;
 		var score:Number = 0;
 		var other:Heart = null;
+		var playing:Boolean = false;
 		
 		public function Heart() {		
 			var bodyDef:b2BodyDef = new b2BodyDef;
@@ -47,6 +48,20 @@ package  {
 			DoInputMotion();
 			x = body.GetPosition().x * Game.ToFlash;
 			y = body.GetPosition().y * Game.ToFlash;
+			if (body.GetLinearVelocity().x <= 0)
+				scaleX = 1;
+			else
+				scaleX = -1;
+			if (movingLeft || movingRight) {
+				if (!playing) {
+					gotoAndPlay(4);
+					playing = true;
+				}
+			}
+			else {
+				playing = false;
+				gotoAndStop(3);
+			}
 		}
 		
 		public function DoInputMotion() {

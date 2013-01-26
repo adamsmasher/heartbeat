@@ -39,7 +39,7 @@
 			for (i = 0; i < segments.length; i++) {
 				var t:Number = i / (segments.length - 1.0);
 				//segments[i].Init(i == 0 || i == segments.length - 1);
-				segments[i].Init(i == 0, Misc.Lerp(50, 5, t));
+				segments[i].Init(i == 0, Misc.Lerp(20, 20, t));
 			}
 			
 			for (i = 0; i < segments.length; i++) {
@@ -87,6 +87,7 @@
 		var currBeatIndex:int = 0;
 		var nextBeat:Number = 0;
 		var beatDelay:Number = 0;
+		var sign:Number = 1;
 		public function SetTrack(_track:int):void {
 			track = _track;
 			currBeatIndex = 0;
@@ -94,7 +95,7 @@
 			if (_track == 1) {
 				trackLength = Audio.ChangeMusic(IntroMusicLoop);
 				beats = new Array(1, 2, 3, 4, 5, 6);
-				beatDelay = 1;
+				beatDelay = 1.0;
 			}
 			else if (_track == 2) {
 				
@@ -115,9 +116,10 @@
 				//currSegmentPos.y = tugSegment.initialy + Misc.Random(-500, 500);
 				nextBeat = Game.instance.time + beatDelay;
 				currBeatIndex = (currBeatIndex + 1) % beats.length;
-				sinSpeed = Math.PI*2.0 * beatDelay*0.6;
+				sinSpeed = Math.PI*2.0 / beatDelay;
 				sinTime = 0;
-				amp = 150;
+				amp = 350;
+				//sign *= -1;
 			}
 			if (sinTime < Math.PI * 2.0) {
 				sinTime = sinTime + sinSpeed * Game.dt;
@@ -126,13 +128,14 @@
 				for (i = 0; i < segments.length; i++) {
 					t = i / Number(segments.length - 1);
 					var timeOffset:Number = Misc.Lerp(sinTimeDelay, 0, t);
-					var finalTime:Number = Misc.Clamp(sinTime - timeOffset, -Math.PI * 2.0, 0);
-					val = Math.sin(finalTime) * amp;
+					var finalTime:Number = Misc.Clamp(sinTime - timeOffset, -Math.PI * 2.0, Math.PI * 2.0);
+					val = Math.sin(finalTime) * amp * sign;
 					//segments[i].SetPosition(segments[i].initialx, segments[i].initialy + val);
+					//segments[i].ApplyForce(0, val * 100);
 					segments[i].SetVelocity(0, val);
 				}
-				// keep tugsement x position constant
-				tugSegment.SetPosition(tugSegment.initialx, tugSegment.y);
+				// keep tugsement position constant
+				tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy);
 				
 				//tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy - val);
 				//for (i = 0; i < pullSegments.length; i++) {
