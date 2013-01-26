@@ -70,6 +70,10 @@
 		public function SetVelocity(_x:Number, _y:Number):void {
 			body.SetLinearVelocity(new b2Vec2(_x * Game.ToBox, _y * Game.ToBox));
 		}
+		
+		public function ApplyForce(_x:Number, _y:Number):void {
+			body.ApplyForce(new b2Vec2(_x * Game.ToBox, _y * Game.ToBox), body.GetPosition());
+		}
 	}
 }
 

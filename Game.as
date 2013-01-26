@@ -47,7 +47,7 @@
 		
 		public function Tick(e:Event):void {
 			time = time + dt;
-			world.Step(dt, 5, 5);
+			world.Step(dt, 10, 10);
 		}
 		
 		public function CreateStaticBody(_mc:MovieClip, _groupIndex:int = 0) {
