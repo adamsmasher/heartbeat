@@ -15,17 +15,20 @@
 		var body:b2Body = null;
 		var ex:Number = 0;
 		var ey:Number = 0;
+		var initialx:Number = 0;
+		var initialy:Number = 0;
 		var used:Boolean = false; // for Rope.as
 		
 		public function RopeSegment() {
-			
+			initialx = x;
+			initialy = y;
 		}
 		
-		public function Init(_static:Boolean):void {			
+		public function Init(_static:Boolean, _dens:Number):void {			
 			var bodyDef:b2BodyDef = new b2BodyDef;
 			bodyDef.position = new b2Vec2(x * Game.ToBox, y * Game.ToBox);
-			bodyDef.linearDamping = 0.0;
-			bodyDef.angularDamping = 0.0;
+			bodyDef.linearDamping = 4.0;
+			bodyDef.angularDamping = 4.0;
 			if (_static) {
 				bodyDef.type = b2Body.b2_staticBody;
 			}
@@ -45,7 +48,7 @@
 			
 			var fixtureDef:b2FixtureDef = new b2FixtureDef;
 			fixtureDef.shape = polygonShape;
-			fixtureDef.density = 1;
+			fixtureDef.density = _dens;
 			fixtureDef.restitution = 0.5;
 			fixtureDef.friction = 0.5;
 			fixtureDef.filter.groupIndex = -1; // rope segments never collide with each other
@@ -60,8 +63,12 @@
 			rotation = Misc.ToDegrees(body.GetAngle());
 		}
 		
-		public function SetBeat():void {
-			
+		public function SetPosition(_x:Number, _y:Number):void {
+			body.SetPosition(new b2Vec2(_x * Game.ToBox, _y * Game.ToBox));
+		}
+		
+		public function SetVelocity(_x:Number, _y:Number):void {
+			body.SetLinearVelocity(new b2Vec2(_x * Game.ToBox, _y * Game.ToBox));
 		}
 	}
 }
