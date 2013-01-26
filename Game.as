@@ -45,7 +45,6 @@
 			CreateStaticBody(bottomborder, -1);
 			CreateStaticBody(leftborder, -1);
 			CreateStaticBody(rightborder, -1);
-			ConnectHearts();
 			//Audio.ChangeMusic(IntroMusicLoop);
 			rope.SetTrack(1);
 		}
@@ -55,6 +54,7 @@
 			ApplyGravity();
 			world.Step(dt, 5, 5);
 			PickupItems();
+			CheckForGameOver();
 		}
 		
 		public function CreateStaticBody(_mc:MovieClip, _groupIndex:int = 0) {
@@ -124,13 +124,6 @@
 				heart.movingRight = false;
 			}
 		}
-		
-		public function ConnectHearts() {
-			var heartDistanceJointDef:b2DistanceJointDef = new b2DistanceJointDef();
-			heartDistanceJointDef.Initialize(square.body, square2.body, square.body.GetPosition(), square2.body.GetPosition());
-			heartDistanceJointDef.collideConnected = true;
-			heartDistanceJoint = b2DistanceJoint(world.CreateJoint(heartDistanceJointDef));
-		}
 
 		public function ApplyGravity() {
 			square.body.ApplyForce(new b2Vec2(0, 250), square.body.GetPosition());
@@ -149,6 +142,17 @@
 						item.Collected();
 					}
 				}
+			}
+		}
+
+		public function CheckForGameOver() {
+			// Game is over when hearts are too far apart
+			var dx = square.x - square2.x;
+			var dy = square.y - square2.y;
+			var d2 = dx * dx + dy * dy;
+			if (d2 > 100000) {
+				trace(d2);
+				trace("GAME OVER");
 			}
 		}
 	}
