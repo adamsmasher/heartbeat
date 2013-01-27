@@ -11,6 +11,10 @@ package
 		var time:Number = 0;
 		var i:int = 0;
 		
+		public function reset() {
+			currentWait = time = i = 0;
+		}
+
 		private static var script:Array = [
 		/*	// wait a while to let the player get accustomed to controls
 			new WaitEvent(300),
@@ -127,7 +131,7 @@ package
 					time = 0;
 					i++;
 				} else {
-					// we're done!
+					Game.instance.DoGameOver();
 				}
 			}
 		}

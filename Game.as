@@ -53,6 +53,7 @@
 			square.OnNewGame();
 			square2.OnNewGame();
 			rope.OnNewGame();
+			script.reset();
 		}
 		
 		public function DoGameOver():void {
