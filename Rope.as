@@ -123,6 +123,9 @@
 			var i:int;
 			var t:Number = 0;
 			
+			if (!Game.instance.gameStarted)
+				return;
+			
 			if (Game.instance.gameOver && Game.instance.gameOverTime > 3) {
 			}
 			else {
