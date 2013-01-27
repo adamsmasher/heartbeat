@@ -93,7 +93,7 @@
 			currBeatIndex = 0;
 			nextBeat = 0;
 			if (_track == 1) {
-				trackLength = Audio.ChangeMusic(IntroMusicLoop);
+				trackLength = Audio.ChangeMusic(Soundtrack);
 				beats = new Array(1, 2, 3, 4, 5, 6);
 				beatDelay = 1.0;
 			}
