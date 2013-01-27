@@ -14,6 +14,12 @@ package  {
 		}
 		
 		public function Tick(e:Event):void {
+			if (!Game.instance.gameStarted) {
+				visible = false;
+				return;
+			}
+			visible = true;
+			
 			x = heart1.x;
 			y = heart1.y;
 			rotation = Misc.ToDegrees(Math.atan2(heart2.y - heart1.y, heart2.x - heart1.x));

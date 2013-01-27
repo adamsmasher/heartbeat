@@ -27,7 +27,7 @@ package  {
 				musicChannel.stop();
 			}
 			music = new _sound as Sound;
-			music.play(0, -1, null);
+			music.play(0, 9999999, null);
 			musicVolume = 0.0;
 			musicTrans = new SoundTransform(0.0, 0.0);
 			musicChannel = music.play(0, int.MAX_VALUE, musicTrans);

@@ -55,6 +55,12 @@ package  {
 		}
 		
 		public function Tick(e:Event):void {
+			if (!Game.instance.gameStarted) {
+				visible = false;
+				return;
+			}
+			visible = true;
+			
 			DoInputMotion();
 			x = body.GetPosition().x * Game.ToFlash;
 			y = body.GetPosition().y * Game.ToFlash;
