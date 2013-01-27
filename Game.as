@@ -16,19 +16,20 @@
 		var world:b2World = null;
 		var time:Number = 0;
 		var items:Array = new Array;
-		
+		var script:Script = new Script();
+
 		public static const Color_Red:int = 1;
 		public static const Color_Blue:int = 2;
-		
+
 		public static var StageWidth:Number = 800;
 		public static var StageHeight:Number = 500;
 		public static var ToBox:Number = 1.0 / 4.0;
 		public static var ToFlash:Number = 1.0 / ToBox;
 		public static var instance:Game = null;
 		public static var dt:Number = 1.0 / 30.0;
-		
+
 		public static var heartDistanceJoint:b2DistanceJoint;
-		
+
 		public function Game() {
 			addEventListener(Event.ADDED_TO_STAGE, Added, false, 0, true);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, KeyDown);
@@ -61,15 +62,13 @@
 			square2.face.gotoAndStop(2);
 			
 			new MiniRope(square, square2);
-			
-			MakeGlowText(50, 50, "EXCITEMENT", Color_Blue);
-			MakeGlowText(400, 50, "LIES", Color_Red);
 		}
 		
 		public function Tick(e:Event):void {
 			time = time + dt;
 			ApplyGravity();
 			UpdateScoreCard();
+			script.Tick();
 			world.Step(dt, 10, 10);
 			for (var i = 0; i < items.length; i++) {
 				items[i].timeAlive++;
