@@ -4,6 +4,7 @@
 	
 	public class Item extends MovieClip {
 		var pickedUp:Boolean = false;
+		var particleFrame:int = 0;
 		var killed:Boolean = false;
 		
 		public function Item() {

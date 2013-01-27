@@ -17,6 +17,11 @@
 		var time:Number = 0;
 		var items:Array = new Array;
 		var script:Script = new Script();
+		public var gameOver:Boolean = false;
+		public var gameOverTime:Number = 0;
+		public var gameOverMovingRope:Boolean = false;
+		public var gameOverMovingRopeTime:Number = 0;
+		public var gameOverNextGameOverScreen:Number = 0;
 
 		public static const Color_Red:int = 1;
 		public static const Color_Blue:int = 2;
@@ -27,7 +32,6 @@
 		public static var ToFlash:Number = 1.0 / ToBox;
 		public static var instance:Game = null;
 		public static var dt:Number = 1.0 / 30.0;
-		public static var gameOver:Boolean = false;
 		public static var heartDistanceJoint:b2DistanceJoint;
 
 		public function Game() {
@@ -42,9 +46,23 @@
 			Init();
 		}
 		
+		public function DoNewGame():void {
+			gameOver = false;
+			gameOverScreen.visible = false;
+			gameOverMovingRope = false;
+			square.OnNewGame();
+			square2.OnNewGame();
+			rope.OnNewGame();
+		}
+		
 		public function DoGameOver():void {
 			if (!gameOver) {
+				gameOverTime = 0;
+				gameOverMovingRopeTime = 0;
+				var beep:beeper = new beeper;
+				beep.play();
 				gameOver = true;
+				gameOverNextGameOverScreen = time + 7;
 			}
 		}
 		
@@ -54,6 +72,7 @@
 			world.SetContactListener(new ItemContactListener());
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 			gotoAndStop(2);
+			gameOverScreen.visible = false;
 			CreateStaticBody(topborder, -1);
 			//CreateStaticBody(bottomborder, -1);
 			CreateStaticBody(leftborder, -1);
@@ -71,11 +90,24 @@
 		}
 		
 		public function Tick(e:Event):void {
+			if (gameOver) {
+				gameOverTime += dt;
+				gameOverMovingRope = gameOverTime >= 5.0;
+				if (gameOverMovingRope)
+					gameOverMovingRopeTime += dt;
+				if (gameOverNextGameOverScreen < time) {
+					if (!gameOverScreen.visible) {
+						gameOverScreen.visible = true;
+						gameOverScreen.Update();
+					}
+				}
+			}
 			time = time + dt;
 			ApplyGravity();
 			UpdateScoreCard();
 			script.Tick();
 			world.Step(dt, 10, 10);
+			
 			for (var i = 0; i < items.length; i++) {
 				items[i].timeAlive++;
 			}
