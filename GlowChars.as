@@ -49,6 +49,12 @@
 			rotation = Misc.ToDegrees(body.GetAngle());
 			super.Tick(e);
 		}
+		
+		public override function Collected() {
+			ParticleEffect.Default(x, y, 0, 0, 200, 2, 0.8, 8, 100, 0, 1);
+			Game.instance.world.DestroyBody(body);
+			super(this).Collected();
+		}
 	}
 }
 
