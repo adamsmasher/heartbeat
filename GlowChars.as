@@ -16,6 +16,10 @@
 		var body:b2Body = null;
 		var timeAlive:Number = 0;
 		var color:int;
+		var state:int = WAITING;
+		
+		private static const WAITING:int = 0;
+		private static const DROPPING:int = 1;
 		
 		public function GlowChars(_color:int) {
 			this.color = _color;
@@ -45,7 +49,11 @@
 		}
 		
 		override public function Tick(e:Event):void {
-			body.ApplyImpulse(new b2Vec2(0, 50), body.GetPosition());
+			if (state == DROPPING) {
+				body.ApplyImpulse(new b2Vec2(0, 50), body.GetPosition());
+			} else if (timeAlive > 30) {
+				state = DROPPING;
+			}
 			x = body.GetPosition().x * Game.ToFlash;
 			y = body.GetPosition().y * Game.ToFlash;
 			rotation = Misc.ToDegrees(body.GetAngle());
@@ -60,35 +68,13 @@
 		}
 
 		public function CheckForTimeout() {
-			if (timeAlive > 90) {
+			if (timeAlive > 120) {
 				Game.instance.world.DestroyBody(body);
 				Misc.RemoveSpriteIfInside(this, Game.instance);
 				Misc.RemoveObject(this, Game.instance.items);
-			} else if (timeAlive > 60) {
+			} else if (timeAlive > 90) {
 				visible = !visible;
 			}
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
