@@ -402,6 +402,19 @@ package  {
 		}
 		*/
 		
+		public static function RemoveObject(_item:Object, _array:Array):Boolean {
+			if (_item == null || _array == null)
+				return false;
+			var i:int;
+			for (i = 0; i < _array.length; i++) {
+				if (_array[i] == _item) {
+					_array.splice(i, 1);
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		public static function FindMovieClip(_mc:MovieClip, _name:String):MovieClip {
 			var i:int;
 			var obj:DisplayObject;

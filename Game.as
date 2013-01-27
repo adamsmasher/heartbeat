@@ -15,6 +15,7 @@
 	public class Game extends MovieClip {
 		var world:b2World = null;
 		var time:Number = 0;
+		var items:Array = new Array;
 		
 		public static var StageWidth:Number = 800;
 		public static var StageHeight:Number = 500;
@@ -54,6 +55,8 @@
 			square2.face.gotoAndStop(2);
 			
 			new MiniRope(square, square2);
+			
+			MakeGlowText(50, 50, "ABCDEFGH DOGS WILL BE DOG   ");
 		}
 		
 		public function Tick(e:Event):void {
@@ -139,9 +142,9 @@
 		}
 
 		public function PickupItems() {
-			for (var i:int = 0; i < numChildren; i++) {
-				if (getChildAt(i) is Item) {
-					var item:Item = Item(getChildAt(i));
+			for (var i:int = 0; i < items.length; i++) {
+				var item:Item = items[i] as Item;
+				if (item) {
 					if (item.hitTestObject(square)) {
 						square.score++;
 						item.Collected();
@@ -152,6 +155,28 @@
 				}
 			}
 		}
+		
+		public function MakeGlowText(_x:Number, _y:Number, _text:String):void {			
+			var i:int;
+			var xoffset:Number = 0;
+			for (i = 0; i < _text.length; i++) {
+				var code:int = _text.charCodeAt(i);
+				// spacebar
+				if (code == 32) {
+					xoffset += 10;
+				}
+				else {
+					var char:GlowChars = new GlowChars;
+					char.x = _x + xoffset;
+					char.y = _y;
+					// ABCDEF... to 12345...
+					char.base.gotoAndStop(code - 65 + 1);
+					addChild(char);
+					xoffset += char.width * 1.1;
+					char.MakeIntoPhysicsObject();
+				}
+			}
+		}
 
 		public function CheckForGameOver() {
 			// Game is over when hearts are too far apart
@@ -159,8 +184,8 @@
 			var dy = square.y - square2.y;
 			var d2 = dx * dx + dy * dy;
 			if (d2 > 100000) {
-				trace(d2);
-				trace("GAME OVER");
+				//trace(d2);
+				//trace("GAME OVER");
 			}
 		}
 	}
