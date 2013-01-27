@@ -2,11 +2,13 @@
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.Joints.b2RevoluteJoint;
 	import Box2D.Dynamics.Joints.b2RevoluteJointDef;
+	import Box2D.Dynamics.b2Body;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Point;
 	public class Rope extends MovieClip {
 		var segments:Array = new Array;
+		var leftSegment:RopeSegment = null;
 		var tugSegment:RopeSegment = null;
 		var currSegmentPos:Point = new Point;
 		var sinTime:Number = 0;
@@ -55,6 +57,7 @@
 			}
 			
 			tugSegment = segments[i - 1];
+			leftSegment = segments[0];
 			currSegmentPos.x = tugSegment.initialx;
 			currSegmentPos.y = tugSegment.initialy;
 			
@@ -105,14 +108,22 @@
 			}
 		}
 		
+		public function OnNewGame():void {
+			var i:int;
+			for (i = 0; i < segments.length; i++) {
+				segments[i].SetPosition(segments[i].initialx, segments[i].initialy);
+				segments[i].SetVelocity(0, 0);
+			}
+			leftSegment.body.SetType(b2Body.b2_staticBody);
+			tugSegment.body.SetType(b2Body.b2_staticBody);
+		}
+		
 		const sinTimeDelay:Number = Math.PI * 4.25;
 		public function Tick(e:Event):void {
 			var i:int;
 			var t:Number = 0;
 			
-			if (Game.instance.gameOver) {
-				x = body.GetPosition().x * Game.ToFlash;
-				y = body.GetPosition().y * Game.ToFlash;
+			if (Game.instance.gameOver && Game.instance.gameOverTime > 3) {
 			}
 			else {
 				tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy);	

@@ -13,10 +13,12 @@ package  {
 	public class Heart extends MovieClip {
 		var ex:Number = 0;
 		var ey:Number = 0;
+		var initialX:Number = 0;
+		var initialY:Number = 0;
 		var movingLeft:Boolean = false;
 		var movingRight:Boolean = false;
 		var body:b2Body = null;
-		var score:Number = 0;
+		var score:int = 0;
 		var other:Heart = null;
 		var playing:Boolean = false;
 		var color:int;
@@ -29,6 +31,9 @@ package  {
 			bodyDef.type = b2Body.b2_dynamicBody;
 			body = Game.instance.world.CreateBody(bodyDef);
 			body.SetUserData(this);
+			
+			initialX = x;
+			initialY = y;
 
 			var polygonShape:b2PolygonShape = new b2PolygonShape;
 			ex = width * 0.5;
@@ -42,6 +47,11 @@ package  {
 			var fixture:b2Fixture = body.CreateFixture(fixtureDef);
 			fixture.SetRestitution(0);
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
+		}
+		
+		public function OnNewGame():void {
+			score = 0;
+			body.SetPosition(new b2Vec2(initialX * Game.ToBox, initialY * Game.ToBox));
 		}
 		
 		public function Tick(e:Event):void {

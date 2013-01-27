@@ -62,7 +62,7 @@
 		}
 		
 		public override function Collected() {
-			ParticleEffect.Default(x, y, 0, 0, 200, 2, 0.8, 8, 100, 0, 1);
+			ParticleEffect.Default(x, y, 10, 10, 200, particleFrame, 0.8, 5, 100, 0, 1);
 			Game.instance.world.DestroyBody(body);
 			super(this).Collected();
 		}
