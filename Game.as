@@ -149,11 +149,11 @@
 		}
 		
 		public function CheckForP1Down(keyCode:uint) {
-			HeartKeyDown(square, keyCode, Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP);
+			HeartKeyDown(square, keyCode, Keyboard.A, Keyboard.D, Keyboard.W);
 		}
 		
 		public function CheckForP2Down(keyCode:uint) {
-			HeartKeyDown(square2, keyCode, Keyboard.A, Keyboard.D, Keyboard.W);
+			HeartKeyDown(square2, keyCode, Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP);
 		}
 		
 		public function HeartKeyDown(heart:Heart, keyCode:uint, leftKeyCode:uint, rightKeyCode:uint, jumpKeyCode:uint) {
@@ -172,11 +172,11 @@
 		}
 		
 		public function CheckForP1Up(keyCode:uint) {
-			HeartKeyUp(square, keyCode, Keyboard.LEFT, Keyboard.RIGHT);
+			HeartKeyUp(square, keyCode, Keyboard.A, Keyboard.D);
 		}
 		
 		public function CheckForP2Up(keyCode:uint) {
-			HeartKeyUp(square2, keyCode, Keyboard.A, Keyboard.D);
+			HeartKeyUp(square2, keyCode, Keyboard.LEFT, Keyboard.RIGHT);
 		}
 		
 		public function HeartKeyUp(heart:Heart, keyCode:uint, leftKeyCode:uint, rightKeyCode:uint) {
