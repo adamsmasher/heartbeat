@@ -14,7 +14,11 @@
 			if (pickedUp) {
 				Misc.RemoveSpriteIfInside(this, Game.instance);
 				Misc.RemoveObject(this, Game.instance.items);
+				Collected();
 			}
+		}
+		
+		public function Collected() {
 		}
 	}
 }
