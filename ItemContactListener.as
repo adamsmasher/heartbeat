@@ -17,11 +17,11 @@ package
 		override public function BeginContact(contact:b2Contact):void {
 			var dataA = contact.GetFixtureA().GetBody().GetUserData();
 			var dataB = contact.GetFixtureB().GetBody().GetUserData();
-			if (dataA is Item && dataB is Heart) {
-				Item(dataA).pickedUp = true;
+			if (dataA is GlowChars && dataB is Heart && GlowChars(dataA).color == Heart(dataB).color) {
+				GlowChars(dataA).pickedUp = true;
 				Heart(dataB).score++;
-			} else if (dataA is Heart && dataB is Item) {
-				Item(dataB).pickedUp = true;
+			} else if (dataA is Heart && dataB is GlowChars && GlowChars(dataB).color == Heart(dataA).color) {
+				GlowChars(dataB).pickedUp = true;
 				Heart(dataA).score++;
 			}
 		}

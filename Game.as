@@ -16,10 +16,11 @@
 		var world:b2World = null;
 		var time:Number = 0;
 		var items:Array = new Array;
-		
+		var script:Script = new Script();
+
 		public static const Color_Red:int = 1;
 		public static const Color_Blue:int = 2;
-		
+
 		public static var StageWidth:Number = 800;
 		public static var StageHeight:Number = 500;
 		public static var ToBox:Number = 1.0 / 4.0;
@@ -27,9 +28,8 @@
 		public static var instance:Game = null;
 		public static var dt:Number = 1.0 / 30.0;
 		public static var gameOver:Boolean = false;
-		
 		public static var heartDistanceJoint:b2DistanceJoint;
-		
+
 		public function Game() {
 			addEventListener(Event.ADDED_TO_STAGE, Added, false, 0, true);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, KeyDown);
@@ -61,22 +61,24 @@
 			//Audio.ChangeMusic(IntroMusicLoop);
 			rope.SetTrack(1);
 			square.other = square2;
-			square2.other = square;			
+			square2.other = square;	
+			square.color = Color_Red;
+			square2.color = Color_Blue;
 			square.face.gotoAndStop(1);
 			square2.face.gotoAndStop(2);
 			
 			new MiniRope(square, square2);
-			
-			MakeGlowText(50, 50, "EXCITEMENT", Color_Blue);
-			MakeGlowText(400, 50, "LIES", Color_Red);
 		}
 		
 		public function Tick(e:Event):void {
 			time = time + dt;
 			ApplyGravity();
-			CheckForGameOver();
 			UpdateScoreCard();
+			script.Tick();
 			world.Step(dt, 10, 10);
+			for (var i = 0; i < items.length; i++) {
+				items[i].timeAlive++;
+			}
 		}
 		
 		public function UpdateScoreCard() {
@@ -167,7 +169,7 @@
 					xoffset += 10;
 				}
 				else {
-					var char:GlowChars = new GlowChars;
+					var char:GlowChars = new GlowChars(_color);
 					char.x = _x + xoffset;
 					char.y = _y;
 					// ABCDEF... to 12345...
@@ -177,17 +179,6 @@
 					xoffset += char.width * 1.1;
 					char.MakeIntoPhysicsObject();
 				}
-			}
-		}
-
-		public function CheckForGameOver() {
-			// Game is over when hearts are too far apart
-			var dx = square.x - square2.x;
-			var dy = square.y - square2.y;
-			var d2 = dx * dx + dy * dy;
-			if (d2 > 100000) {
-				//trace(d2);
-				//trace("GAME OVER");
 			}
 		}
 	}
