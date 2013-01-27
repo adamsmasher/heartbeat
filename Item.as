@@ -26,3 +26,9 @@
 		}
 	}
 }
+
+/*
+different colored letter
+collision on specific color
+clock countdown
+*/
