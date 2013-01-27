@@ -28,7 +28,7 @@ package  {
 			bodyDef.type = b2Body.b2_dynamicBody;
 			body = Game.instance.world.CreateBody(bodyDef);
 			body.SetUserData(this);
-			
+
 			var polygonShape:b2PolygonShape = new b2PolygonShape;
 			ex = width * 0.5;
 			ey = height * 0.5;
