@@ -58,8 +58,16 @@
 		}
 		
 		public function Tick(e:Event):void {
-			if (Game.instance.gameOver) {
-				body.SetLinearVelocity(new b2Vec2(0, (initialy - y) * Game.ToBox));
+			if (Game.instance.gameOver && Game.instance.gameOverTime > 3) {
+				if (Game.instance.gameOverMovingRope) {
+					if (this == Game.instance.rope.tugSegment || this == Game.instance.rope.leftSegment)
+						body.SetType(b2Body.b2_dynamicBody);
+					//body.SetLinearVelocity(new b2Vec2(0, (initialy - y) * Game.ToBox * 25));
+					body.SetPosition(new b2Vec2((initialx - Game.instance.gameOverMovingRopeTime * 250) * Game.ToBox, initialy * Game.ToBox));
+				}
+				else {
+					body.SetLinearVelocity(new b2Vec2(0, (initialy - y) * Game.ToBox * 25));
+				}
 			}
 			else {
 				
