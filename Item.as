@@ -4,6 +4,7 @@
 	
 	public class Item extends MovieClip {
 		var pickedUp:Boolean = false;
+		var killed:Boolean = false;
 		
 		public function Item() {
 			Game.instance.addChild(this);
@@ -12,9 +13,12 @@
 		
 		public function Tick(e:Event):void {
 			if (pickedUp) {
-				Misc.RemoveSpriteIfInside(this, Game.instance);
-				Misc.RemoveObject(this, Game.instance.items);
-				Collected();
+				if (!killed) {
+					Misc.RemoveSpriteIfInside(this, Game.instance);
+					Misc.RemoveObject(this, Game.instance.items);
+					Collected();
+					killed = true;
+				}
 			}
 		}
 		
