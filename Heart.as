@@ -107,7 +107,7 @@ package  {
 				var dx = this.x - other.x;
 				var dy = this.y - other.y;
 				var d2 = dx * dx + dy * dy;
-				return d2 > 40000;
+				return d2 > 20000;
 			}
 			return false;
 		}
