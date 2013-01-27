@@ -1,5 +1,6 @@
 ﻿package  {
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	
 	public class Item extends MovieClip {
 		var pickedUp:Boolean = false;
@@ -9,9 +10,8 @@
 			Game.instance.items.push(this);
 		}
 		
-		public function Collected() {
-			if (!pickedUp) {
-				pickedUp = true;
+		public function Tick(e:Event):void {
+			if (pickedUp) {
 				Misc.RemoveSpriteIfInside(this, Game.instance);
 				Misc.RemoveObject(this, Game.instance.items);
 			}

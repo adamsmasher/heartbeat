@@ -41,6 +41,7 @@
 		public function Init():void {
 			SoundEffects.Init();
 			world = new b2World(new b2Vec2(0, 0), false);
+			world.SetContactListener(new ItemContactListener());
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 			gotoAndStop(2);
 			CreateStaticBody(topborder, -1);
@@ -63,7 +64,6 @@
 			time = time + dt;
 			ApplyGravity();
 			world.Step(dt, 10, 10);
-			PickupItems();
 			CheckForGameOver();
 			UpdateScoreCard();
 			world.Step(dt, 10, 10);
@@ -81,7 +81,7 @@
 			bodyDef.angularDamping = 0.0;
 			bodyDef.type = b2Body.b2_staticBody;
 			var body:b2Body = world.CreateBody(bodyDef);
-			
+
 			var polygonShape:b2PolygonShape = new b2PolygonShape;
 			var ex:Number = _mc.width * 0.5;
 			var ey:Number = _mc.height * 0.5;
@@ -145,21 +145,6 @@
 		public function ApplyGravity() {
 			square.body.ApplyImpulse(new b2Vec2(0, 1000), square.body.GetPosition());
 			square2.body.ApplyImpulse(new b2Vec2(0, 1000), square2.body.GetPosition());
-		}
-
-		public function PickupItems() {
-			for (var i:int = 0; i < items.length; i++) {
-				var item:Item = items[i] as Item;
-				if (item) {
-					if (item.hitTestObject(square)) {
-						square.score++;
-						item.Collected();
-					} else if (item.hitTestObject(square2)) {
-						square2.score++;
-						item.Collected();
-					}
-				}
-			}
 		}
 		
 		public function MakeGlowText(_x:Number, _y:Number, _text:String):void {			

@@ -42,11 +42,12 @@
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 		}
 		
-		public function Tick(e:Event):void {
+		override public function Tick(e:Event):void {
 			body.ApplyImpulse(new b2Vec2(0, 50), body.GetPosition());
 			x = body.GetPosition().x * Game.ToFlash;
 			y = body.GetPosition().y * Game.ToFlash;
 			rotation = Misc.ToDegrees(body.GetAngle());
+			super.Tick(e);
 		}
 	}
 }
