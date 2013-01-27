@@ -58,6 +58,13 @@
 		}
 		
 		public function Tick(e:Event):void {
+			if (Game.instance.gameOver) {
+				body.SetLinearVelocity(new b2Vec2(0, (initialy - y) * Game.ToBox));
+			}
+			else {
+				
+			}
+			
 			x = body.GetPosition().x * Game.ToFlash;
 			y = body.GetPosition().y * Game.ToFlash;
 			rotation = Misc.ToDegrees(body.GetAngle());
