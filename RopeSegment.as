@@ -58,6 +58,12 @@
 		}
 		
 		public function Tick(e:Event):void {
+			if (!Game.instance.gameStarted) {
+				SetPosition(initialx, initialy);
+				SetVelocity(0, 0);
+				return;
+			}
+			
 			if (Game.instance.gameOver && Game.instance.gameOverTime > 3) {
 				if (Game.instance.gameOverMovingRope) {
 					if (this == Game.instance.rope.tugSegment || this == Game.instance.rope.leftSegment)

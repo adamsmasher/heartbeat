@@ -17,6 +17,7 @@
 		var time:Number = 0;
 		var items:Array = new Array;
 		var script:Script = new Script();
+		var gameStarted:Boolean = false;
 		public var gameOver:Boolean = false;
 		public var gameOverTime:Number = 0;
 		public var gameOverMovingRope:Boolean = false;
@@ -90,6 +91,8 @@
 		}
 		
 		public function Tick(e:Event):void {
+			controls.visible = (title.visible || gameOverScreen.visible)
+			
 			if (gameOver) {
 				gameOverTime += dt;
 				gameOverMovingRope = gameOverTime >= 5.0;
