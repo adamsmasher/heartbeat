@@ -69,8 +69,6 @@
 		public function Tick(e:Event):void {
 			time = time + dt;
 			ApplyGravity();
-			world.Step(dt, 10, 10);
-			CheckForGameOver();
 			UpdateScoreCard();
 			world.Step(dt, 10, 10);
 			for (var i = 0; i < items.length; i++) {
@@ -176,17 +174,6 @@
 					xoffset += char.width * 1.1;
 					char.MakeIntoPhysicsObject();
 				}
-			}
-		}
-
-		public function CheckForGameOver() {
-			// Game is over when hearts are too far apart
-			var dx = square.x - square2.x;
-			var dy = square.y - square2.y;
-			var d2 = dx * dx + dy * dy;
-			if (d2 > 100000) {
-				//trace(d2);
-				//trace("GAME OVER");
 			}
 		}
 	}

@@ -42,7 +42,6 @@ package  {
 			var fixture:b2Fixture = body.CreateFixture(fixtureDef);
 			fixture.SetRestitution(0);
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
-			trace("Heart starts");
 		}
 		
 		public function Tick(e:Event):void {
@@ -69,14 +68,12 @@ package  {
 			var far = FarFromOther();
 			if (movingRight) {
 				if (far && other.x < this.x) {
-					trace("WARNING");
 					body.ApplyImpulse(new b2Vec2(100, 0), body.GetPosition());
 				} else {
 					body.ApplyImpulse(new b2Vec2(3000, 0), body.GetPosition());
 				}
 			} else if (movingLeft) {
 				if (far && other.x > this.x) {
-					trace("WARNING");
 					body.ApplyImpulse(new b2Vec2( -100, 0), body.GetPosition());
 				} else {
 					body.ApplyImpulse(new b2Vec2( -3000, 0), body.GetPosition());
