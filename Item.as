@@ -2,12 +2,19 @@
 	import flash.display.MovieClip;
 	
 	public class Item extends MovieClip {
+		var pickedUp:Boolean = false;
+		
 		public function Item() {
-			// constructor code
+			Game.instance.addChild(this);
+			Game.instance.items.push(this);
 		}
 		
 		public function Collected() {
-			this.x = this.y = -100;
+			if (!pickedUp) {
+				pickedUp = true;
+				Misc.RemoveSpriteIfInside(this, Game.instance);
+				Misc.RemoveObject(this, Game.instance.items);
+			}
 		}
 	}
 }
