@@ -140,7 +140,7 @@ package
 		}
 		
 		public function Tick() {
-			if (Game.instance.gameOver)
+			if (Game.instance.gameOver || !Game.instance.gameStarted)
 				return;
 				
 			time++;
