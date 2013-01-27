@@ -111,6 +111,9 @@ package
 		}
 		
 		public function Tick() {
+			if (Game.instance.gameOver)
+				return;
+				
 			time++;
 			if (time > currentWait) {
 				while (i < script.length && script[i] is TextDrop) {
