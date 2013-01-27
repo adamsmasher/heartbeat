@@ -14,6 +14,7 @@
 		var ex:Number = 0;
 		var ey:Number = 0;
 		var body:b2Body = null;
+		var timeAlive:Number = 0;
 		
 		public function GlowChars() {
 			
@@ -48,12 +49,23 @@
 			y = body.GetPosition().y * Game.ToFlash;
 			rotation = Misc.ToDegrees(body.GetAngle());
 			super.Tick(e);
+			CheckForTimeout();
 		}
 		
 		public override function Collected() {
 			ParticleEffect.Default(x, y, 0, 0, 200, 2, 0.8, 8, 100, 0, 1);
 			Game.instance.world.DestroyBody(body);
 			super(this).Collected();
+		}
+
+		public function CheckForTimeout() {
+			if (timeAlive > 90) {
+				Game.instance.world.DestroyBody(body);
+				Misc.RemoveSpriteIfInside(this, Game.instance);
+				Misc.RemoveObject(this, Game.instance.items);
+			} else if (timeAlive > 60) {
+				visible = !visible;
+			}
 		}
 	}
 }

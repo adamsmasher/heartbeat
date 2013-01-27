@@ -67,6 +67,9 @@
 			CheckForGameOver();
 			UpdateScoreCard();
 			world.Step(dt, 10, 10);
+			for (var i = 0; i < items.length; i++) {
+				items[i].timeAlive++;
+			}
 		}
 		
 		public function UpdateScoreCard() {
