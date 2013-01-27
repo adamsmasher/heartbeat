@@ -17,6 +17,9 @@
 		var time:Number = 0;
 		var items:Array = new Array;
 		
+		public static const Color_Red:int = 1;
+		public static const Color_Blue:int = 2;
+		
 		public static var StageWidth:Number = 800;
 		public static var StageHeight:Number = 500;
 		public static var ToBox:Number = 1.0 / 4.0;
@@ -57,7 +60,8 @@
 			
 			new MiniRope(square, square2);
 			
-			MakeGlowText(50, 50, "ABCDEFGH DOGS WILL BE DOG   ");
+			MakeGlowText(50, 50, "EXCITEMENT", Color_Blue);
+			MakeGlowText(400, 50, "LIES", Color_Red);
 		}
 		
 		public function Tick(e:Event):void {
@@ -147,7 +151,7 @@
 			square2.body.ApplyImpulse(new b2Vec2(0, 1000), square2.body.GetPosition());
 		}
 		
-		public function MakeGlowText(_x:Number, _y:Number, _text:String):void {			
+		public function MakeGlowText(_x:Number, _y:Number, _text:String, _color:int):void {			
 			var i:int;
 			var xoffset:Number = 0;
 			for (i = 0; i < _text.length; i++) {
@@ -161,6 +165,7 @@
 					char.x = _x + xoffset;
 					char.y = _y;
 					// ABCDEF... to 12345...
+					char.gotoAndStop(_color);
 					char.base.gotoAndStop(code - 65 + 1);
 					addChild(char);
 					xoffset += char.width * 1.1;
@@ -181,3 +186,20 @@
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
