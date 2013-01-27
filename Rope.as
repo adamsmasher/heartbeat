@@ -110,41 +110,47 @@
 			var i:int;
 			var t:Number = 0;
 			
-			tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy);	
-			if (beats && nextBeat < Game.instance.time) {
-				//currSegmentPos.x = tugSegment.initialx;
-				//currSegmentPos.y = tugSegment.initialy + Misc.Random(-500, 500);
-				nextBeat = Game.instance.time + beatDelay;
-				currBeatIndex = (currBeatIndex + 1) % beats.length;
-				sinSpeed = Math.PI*2.0 / beatDelay;
-				sinTime = 0;
-				amp = 350;
-				//sign *= -1;
+			if (Game.instance.gameOver) {
+				x = body.GetPosition().x * Game.ToFlash;
+				y = body.GetPosition().y * Game.ToFlash;
 			}
-			if (sinTime < Math.PI * 2.0) {
-				sinTime = sinTime + sinSpeed * Game.dt;
-				var val:Number = Math.sin(sinTime) * amp;
-				
-				for (i = 0; i < segments.length; i++) {
-					t = i / Number(segments.length - 1);
-					var timeOffset:Number = Misc.Lerp(sinTimeDelay, 0, t);
-					var finalTime:Number = Misc.Clamp(sinTime - timeOffset, -Math.PI * 2.0, Math.PI * 2.0);
-					val = Math.sin(finalTime) * amp * sign;
-					//segments[i].SetPosition(segments[i].initialx, segments[i].initialy + val);
-					//segments[i].ApplyForce(0, val * 100);
-					segments[i].SetVelocity(0, val);
+			else {
+				tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy);	
+				if (beats && nextBeat < Game.instance.time) {
+					//currSegmentPos.x = tugSegment.initialx;
+					//currSegmentPos.y = tugSegment.initialy + Misc.Random(-500, 500);
+					nextBeat = Game.instance.time + beatDelay;
+					currBeatIndex = (currBeatIndex + 1) % beats.length;
+					sinSpeed = Math.PI*2.0 / beatDelay;
+					sinTime = 0;
+					amp = 350;
+					//sign *= -1;
 				}
-				// keep tugsement position constant
-				tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy);
-				
-				//tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy - val);
-				//for (i = 0; i < pullSegments.length; i++) {
-					//if (i%2)
-					//	pullSegments[i].SetPosition(pullSegments[i].initialx, pullSegments[i].initialy - val);
-					//else
-					//	pullSegments[i].SetPosition(pullSegments[i].initialx, pullSegments[i].initialy + val);
-				//}
-				sinTime += Game.dt;
+				if (sinTime < Math.PI * 2.0) {
+					sinTime = sinTime + sinSpeed * Game.dt;
+					var val:Number = Math.sin(sinTime) * amp;
+					
+					for (i = 0; i < segments.length; i++) {
+						t = i / Number(segments.length - 1);
+						var timeOffset:Number = Misc.Lerp(sinTimeDelay, 0, t);
+						var finalTime:Number = Misc.Clamp(sinTime - timeOffset, -Math.PI * 2.0, Math.PI * 2.0);
+						val = Math.sin(finalTime) * amp * sign;
+						//segments[i].SetPosition(segments[i].initialx, segments[i].initialy + val);
+						//segments[i].ApplyForce(0, val * 100);
+						segments[i].SetVelocity(0, val);
+					}
+					// keep tugsement position constant
+					tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy);
+					
+					//tugSegment.SetPosition(tugSegment.initialx, tugSegment.initialy - val);
+					//for (i = 0; i < pullSegments.length; i++) {
+						//if (i%2)
+						//	pullSegments[i].SetPosition(pullSegments[i].initialx, pullSegments[i].initialy - val);
+						//else
+						//	pullSegments[i].SetPosition(pullSegments[i].initialx, pullSegments[i].initialy + val);
+					//}
+					sinTime += Game.dt;
+				}
 			}
 		}
 	}

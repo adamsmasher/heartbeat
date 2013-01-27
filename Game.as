@@ -26,6 +26,7 @@
 		public static var ToFlash:Number = 1.0 / ToBox;
 		public static var instance:Game = null;
 		public static var dt:Number = 1.0 / 30.0;
+		public static var gameOver:Boolean = false;
 		
 		public static var heartDistanceJoint:b2DistanceJoint;
 		
@@ -41,6 +42,12 @@
 			Init();
 		}
 		
+		public function DoGameOver():void {
+			if (!gameOver) {
+				gameOver = true;
+			}
+		}
+		
 		public function Init():void {
 			SoundEffects.Init();
 			world = new b2World(new b2Vec2(0, 0), false);
@@ -48,7 +55,7 @@
 			addEventListener(Event.ENTER_FRAME, Tick, false, 0, true);
 			gotoAndStop(2);
 			CreateStaticBody(topborder, -1);
-			CreateStaticBody(bottomborder, -1);
+			//CreateStaticBody(bottomborder, -1);
 			CreateStaticBody(leftborder, -1);
 			CreateStaticBody(rightborder, -1);
 			//Audio.ChangeMusic(IntroMusicLoop);
@@ -67,7 +74,6 @@
 		public function Tick(e:Event):void {
 			time = time + dt;
 			ApplyGravity();
-			world.Step(dt, 10, 10);
 			CheckForGameOver();
 			UpdateScoreCard();
 			world.Step(dt, 10, 10);
