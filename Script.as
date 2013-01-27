@@ -16,7 +16,7 @@ package
 		}
 
 		private static var script:Array = [
-		/*	// wait a while to let the player get accustomed to controls
+			// wait a while to let the player get accustomed to controls
 			new WaitEvent(300),
 			// drop one colour, so they can see that blue can pick up blue and red can't (R:0, B:9)
 			new TextDrop(300, 50, "I LOVE THEE", Game.Color_Blue),
@@ -92,23 +92,46 @@ package
 			new TextDrop(280, 50, "SETTLING", Game.Color_Red),
 			new TextDrop(500, 50, "CONTENTMENT", Game.Color_Blue),
 			new TextDrop(165, 175, "APART", Game.Color_Red),
-			new TextDrop(390, 175, "TOGETHER", Game.Color_Blue), */
+			new TextDrop(390, 175, "TOGETHER", Game.Color_Blue),
+			new WaitEvent(300),
 			// sentence drop
-		new TextDrop(50, 75, "THIS", Game.Color_Blue),
-		new WaitEvent(15),
-		new TextDrop(200, 75, "IS", Game.Color_Red),
-		new WaitEvent(15),
-		new TextDrop(350, 75, "A", Game.Color_Blue),
-		new WaitEvent(15),
-		new TextDrop(600, 75, "SENTENCE", Game.Color_Red),
-		new WaitEvent(150),
-		
+			new TextDrop(50, 75, "THIS", Game.Color_Blue),
+			new WaitEvent(15),
+			new TextDrop(200, 75, "IS", Game.Color_Red),
+			new WaitEvent(15),
+			new TextDrop(350, 75, "A", Game.Color_Blue),
+			new WaitEvent(15),
+			new TextDrop(600, 75, "SENTENCE", Game.Color_Red),
+			new WaitEvent(150),
 			// random argument
-			// game over goes here
-			new WaitEvent(6000),
+			new TextDrop(324, 124, "YOU", Game.Color_Blue),
+			new WaitEvent(30),
+			new TextDrop(245, 55, "NO YOU", Game.Color_Red),
+			new WaitEvent(15),
+			new TextDrop(556, 111, "NO YOU", Game.Color_Blue),
+			new WaitEvent(15),
+			new TextDrop(433, 140, "NO YOU", Game.Color_Red),
+			new WaitEvent(15),
+			new TextDrop(333, 88, "NO YOU", Game.Color_Blue),
+			new WaitEvent(15),
+			new TextDrop(140, 70, "NO YOU", Game.Color_Red),
+			new WaitEvent(5),
+			new TextDrop(600, 66, "NO YOU", Game.Color_Blue),
+			new WaitEvent(5),
+			new TextDrop(245, 55, "NO YOU", Game.Color_Red),
+			new WaitEvent(5),
+			new TextDrop(245, 55, "NO YOU", Game.Color_Blue),
+			new WaitEvent(5),
+			new TextDrop(556, 111, "NO YOU", Game.Color_Red),
+			new WaitEvent(5),
+			new TextDrop(433, 140, "NO YOU", Game.Color_Blue),
+			new WaitEvent(5),
+			new TextDrop(333, 88, "NO YOU", Game.Color_Red),
+			new WaitEvent(5),
+
 		];
-			
-		
+
+
 		public function Script() 
 		{
 			
