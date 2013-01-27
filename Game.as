@@ -62,11 +62,15 @@
 			world.Step(dt, 10, 10);
 			PickupItems();
 			CheckForGameOver();
-			p1Score.text = "0";
-			p2Score.text = "0";
+			UpdateScoreCard();
 			world.Step(dt, 10, 10);
 		}
 		
+		public function UpdateScoreCard() {
+			p1Score.text = square.score.toString();
+			p2Score.text = square2.score.toString();
+		}
+
 		public function CreateStaticBody(_mc:MovieClip, _groupIndex:int = 0) {
 			var bodyDef:b2BodyDef = new b2BodyDef;
 			bodyDef.position = new b2Vec2(_mc.x * Game.ToBox, _mc.y * Game.ToBox);
