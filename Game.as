@@ -54,7 +54,9 @@
 			//Audio.ChangeMusic(IntroMusicLoop);
 			rope.SetTrack(1);
 			square.other = square2;
-			square2.other = square;			
+			square2.other = square;	
+			square.color = Color_Red;
+			square2.color = Color_Blue;
 			square.face.gotoAndStop(1);
 			square2.face.gotoAndStop(2);
 			
@@ -164,7 +166,7 @@
 					xoffset += 10;
 				}
 				else {
-					var char:GlowChars = new GlowChars;
+					var char:GlowChars = new GlowChars(_color);
 					char.x = _x + xoffset;
 					char.y = _y;
 					// ABCDEF... to 12345...

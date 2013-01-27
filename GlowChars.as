@@ -15,9 +15,10 @@
 		var ey:Number = 0;
 		var body:b2Body = null;
 		var timeAlive:Number = 0;
+		var color:int;
 		
-		public function GlowChars() {
-			
+		public function GlowChars(_color:int) {
+			this.color = _color;
 		}
 		
 		public function MakeIntoPhysicsObject():void {

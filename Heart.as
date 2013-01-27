@@ -19,7 +19,8 @@ package  {
 		var score:Number = 0;
 		var other:Heart = null;
 		var playing:Boolean = false;
-		
+		var color:int;
+
 		public function Heart() {		
 			var bodyDef:b2BodyDef = new b2BodyDef;
 			bodyDef.position = new b2Vec2(x * Game.ToBox, y * Game.ToBox);
