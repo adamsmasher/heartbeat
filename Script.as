@@ -14,7 +14,7 @@ package
 		private static var script:Array = [
 			new WaitEvent(300),
 			new TextDrop(50, 50, "TEXTDROP", Game.Color_Blue),
-			new WaitEvent(30),
+			new WaitEvent(90),
 			new TextDrop(550, 50, "ANOTHER", Game.Color_Red),
 			new WaitEvent(6000),
 		];
