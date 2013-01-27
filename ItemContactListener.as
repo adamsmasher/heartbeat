@@ -19,9 +19,11 @@ package
 			var dataB = contact.GetFixtureB().GetBody().GetUserData();
 			if (dataA is GlowChars && dataB is Heart && GlowChars(dataA).color == Heart(dataB).color) {
 				GlowChars(dataA).pickedUp = true;
+				SoundEffects.collect.play();
 				Heart(dataB).score++;
 			} else if (dataA is Heart && dataB is GlowChars && GlowChars(dataB).color == Heart(dataA).color) {
 				GlowChars(dataB).pickedUp = true;
+				SoundEffects.collect.play();
 				Heart(dataA).score++;
 			}
 		}
